@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t superclass2016/react-test -f ./client/Dockerfile.dev ./client
+  - docker run -e CI=true superclass2016/react-test npm test
+
+after_success:
+  - docker build -t superclass2016/multi-client ./client
+  - docker build -t superclass2016/multi-nginx ./nginx
+  - docker build -t superclass2016/multi-server ./server
+  - docker build -t superclass2016/multi-worker ./worker
+# log in to docker cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+# take those images and push them to docker.hub
+  - docker push superclass2016/multi-client
+  - docker push superclass2016/multi-nginx
+  - docker push superclass2016/multi-server
+  - docker push superclass2016/multi-worker
