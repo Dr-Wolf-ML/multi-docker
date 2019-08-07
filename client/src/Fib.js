@@ -31,14 +31,11 @@ class Fib extends Component {
         await axios.post('/api/values', {
             index: this.state.index
         });
-
         this.setState({ index: '' });
-    }
+    };
 
     renderSeenIndexes() {
-        return this.state.seenIndexes.map(({ number }) => {
-            return number;
-        }).join(', ');
+        return this.state.seenIndexes.map(({ number }) => number).join(', ');
     }
 
     renderValues() {
@@ -70,7 +67,7 @@ class Fib extends Component {
                 <h3>Indexes I have seen:</h3>
                 {this.renderSeenIndexes()}
 
-                <h3>Calculated values:</h3>
+                <h3>Calculated Values:</h3>
                 {this.renderValues()}
             </div>
         );
