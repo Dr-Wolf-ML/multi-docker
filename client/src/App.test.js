@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import of App.js deleted
-// new comment
+import App from './App';
 
-it('renders without crashing', () => { });
+it('renders without crashing', () => {});
